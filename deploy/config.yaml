@@ -1,0 +1,194 @@
+environment: production
+
+discovery:
+    maintainer:
+      evm_address:
+      signature:
+    server:
+      endpoint:
+      global_indexer_endpoint:
+
+database:
+  driver: cockroachdb
+  partition: true
+  uri: postgres://root@localhost:26257/defaultdb
+
+stream:
+  enable: false
+  driver: kafka
+  topic: rss3.node.feeds
+  uri: localhost:9092
+
+observability:
+  opentelemetry:
+    metrics:
+      enable: true
+      endpoint: 0.0.0.0:9090
+    traces:
+      enable: true
+      insecure: true
+      endpoint: localhost:4318
+
+component:
+  rss:
+    - network: rss
+      endpoint: https://rsshub.app/
+      parameters:
+        authentication:
+          username:
+          password:
+          access_key:
+          access_code:
+
+  decentralized:
+    # ethereum
+    - network: ethereum
+      worker: fallback
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start:
+        block_number_target:
+    - network: ethereum
+      worker: rss3
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start:
+        block_number_target:
+    - network: polygon
+      worker: lens
+      endpoint: https://rpc.ankr.com/polygon
+      ipfs_gateways:
+      parameters:
+        block_number_start:
+    - network: ethereum
+      worker: opensea
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start:
+    - network: ethereum
+      worker: uniswap
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start:
+    - network: ethereum
+      worker: optimism
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start:
+    - network: polygon
+      worker: aavegotchi
+      endpoint: https://rpc.ankr.com/polygon
+      parameters:
+          block_number_start: 48300005
+    - network: ethereum
+      worker: highlight
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start:
+    - network: crossbell
+      worker: crossbell
+      endpoint: https://rpc.crossbell.io
+      parameters:
+        block_number_start:
+    # farcaster
+    - network: farcaster
+      worker: farcaster
+      endpoint: https://nemes.farcaster.xyz:2281
+      parameters:
+        api_key:
+    # arweave
+    - network: arweave
+      worker: mirror
+      endpoint: https://arweave.net/
+      ipfs_gateways:
+      parameters:
+        block_height_start:
+        rpc_thread_blocks:
+    - network: arweave
+      worker: paragraph
+      endpoint: https://arweave.net/
+      ipfs_gateways:
+      parameters:
+        block_height_start:
+        rpc_thread_blocks:
+    - network: ethereum
+      worker: looksrare
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start:
+    - network: polygon
+      worker: matters
+      endpoint: https://rpc.ankr.com/polygon
+      parameters:
+        block_number_start:
+    - network: arweave
+      worker: momoka
+      endpoint: https://rpc.ankr.com/polygon
+      parameters:
+        block_height_start:
+        rpc_thread_blocks:
+    - network: ethereum
+      endpoint: https://rpc.ankr.com/eth
+      worker: aave
+      parameters:
+        block_number_start:
+    - network: polygon
+      endpoint: https://rpc.ankr.com/polygon
+      worker: aave
+      parameters:
+        block_number_start:
+    - network: avax
+      endpoint: https://rpc.ankr.com/avalanche
+      worker: aave
+      parameters:
+        block_number_start:
+    - network: base
+      endpoint: https://rpc.ankr.com/base
+      worker: aave
+      parameters:
+        block_number_start:
+    - network: optimism
+      endpoint: https://rpc.ankr.com/optimism
+      worker: aave
+      parameters:
+        block_number_start:
+    - network: arbitrum
+      endpoint: https://rpc.ankr.com/arbitrum
+      worker: aave
+      parameters:
+        block_number_start:
+    - network: fantom
+      endpoint: https://rpc.ankr.com/fantom
+      worker: aave
+      parameters:
+        block_number_start:
+    - network: polygon
+      worker: iqwiki
+      endpoint: https://rpc.ankr.com/polygon
+      parameters:
+        block_number_start:
+    - network: ethereum
+      endpoint: https://rpc.ankr.com/eth
+      worker: lido
+      parameters:
+        block_number_start:
+    - network: ethereum
+      endpoint: https://rpc.ankr.com/eth
+      worker: ens
+      parameters:
+        block_number_start:
+    - network: ethereum
+      worker: 1inch
+      endpoint: https://rpc.ankr.com/eth
+      parameters:
+        block_number_start: 12888350
+    - network: rss3-testnet
+      endpoint: https://rpc.testnet.rss3.io
+      worker: fallback
+      parameters:
+        block_number_start:
+    - network: rss3-testnet
+      endpoint: https://rpc.testnet.rss3.io
+      worker: uniswap
+      parameters:
+        block_number_start:
